@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#9b5367">
+<meta name="description" content="A gentle daily prayer and Bible verse companion.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Daily Grace ♡</title>
+<style>
+:root{--rose:#9b5367;--rose2:#f7e5e8;--cream:#fffaf5;--ink:#382832;--gold:#c49a55}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#fff8f3,#f8e8eb);color:var(--ink);font-family:Georgia,serif}
+header{padding:27px 18px 21px;text-align:center;background:linear-gradient(135deg,#f5dfe3,#fff5e8);border-bottom:1px solid #ead4d0}
+.kicker{font:11px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--rose)}
+h1{font-size:34px;margin:8px 0 5px;font-weight:normal;color:#744353}.sub{font-size:14px;color:#745d63}
+main{max-width:680px;margin:auto;padding:14px 14px 36px}.card{background:#ffffffed;border:1px solid #ead8d4;border-radius:18px;padding:18px;margin:13px 0;box-shadow:0 6px 22px #8b596011}
+.date{font:11px Arial,sans-serif;color:var(--rose);letter-spacing:1px;text-transform:uppercase}h2{font-size:21px;font-weight:normal;margin:8px 0 12px;color:#754555}
+.verse{font-style:italic;line-height:1.55;font-size:17px;color:#72515d}.ref{font:12px Arial,sans-serif;color:var(--gold);margin-top:8px}
+.prayer{font-size:16px;line-height:1.7;white-space:pre-line}button{border:0;border-radius:999px;padding:11px 16px;background:var(--rose);color:white;font-size:14px;cursor:pointer}
+button.alt{background:#f4e4e6;color:#79495a;border:1px solid #e6cbd1}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+label{font:13px Arial,sans-serif;color:#674c56}input[type=time]{padding:9px;border:1px solid #e3cdd1;border-radius:10px;background:white;color:var(--ink);font-size:16px}
+.small{font:12px/1.5 Arial,sans-serif;color:#816f74}#status{margin-top:10px;font:12px Arial,sans-serif;color:#6c5960}
+footer{text-align:center;padding:5px 16px 28px;color:#947b80;font:12px Arial,sans-serif}
+#installBtn{display:none;margin:13px auto 0}.pill{display:inline-block;border:1px solid #e6cbd1;background:#fff7f6;color:#8a5968;border-radius:30px;padding:6px 10px;font:11px Arial,sans-serif}
+</style>
+</head>
+<body>
+<header>
+ <div class="kicker">A gentle moment with God</div><h1>Daily Grace ♡</h1>
+ <div class="sub">A little prayer, a little scripture, every day.</div>
+ <button id="installBtn">Install Daily Grace</button>
+</header>
+<main>
+ <section class="card">
+  <div class="date" id="today"></div><h2 id="title">Today's prayer</h2>
+  <div class="verse" id="verse"></div><div class="ref" id="reference"></div>
+ </section>
+ <section class="card">
+  <h2>Today's prayer ♡</h2><div class="prayer" id="prayer"></div>
+  <div class="row" style="margin-top:16px">
+   <button id="another">Another prayer</button><button class="alt" id="copy">Copy prayer</button><button class="alt" id="save">♡ Save prayer</button>
+  </div><div id="copyStatus" class="small" aria-live="polite"></div>
+ </section>
+ <section class="card">
+  <h2>My saved prayers ♡</h2><div id="savedList" class="small">No saved prayers yet.</div>
+ </section>
+ <section class="card">
+  <h2>Daily reminder 🔔</h2>
+  <p class="small">Choose a time and allow notifications. The reminder can notify you while this app is open. For dependable notifications when the app is fully closed, a hosted push-notification service or native app is needed.</p>
+  <div class="row"><label for="reminderTime">Remind me at</label><input id="reminderTime" type="time" value="07:00"><button id="setReminder">Save reminder</button></div>
+  <div id="status" aria-live="polite">No reminder set yet.</div>
+ </section>
+ <section class="card">
+  <h2>A word to carry today</h2>
+  <p class="verse">You are loved, you are not forgotten, and your worth is not measured by how much attention you receive. Take today one gentle step at a time.</p>
+  <div class="ref">Psalm 139:14 · Jeremiah 29:11</div>
+ </section>
+</main>
+<footer><span class="pill">Works offline after first visit</span><p>Made with care ♡ Take a quiet moment, breathe, and pray.</p></footer>
+<script>
+const prayers=[
+{title:"Restoration",verse:"“And I will restore to you the years that the locust hath eaten.”",ref:"Joel 2:25 (KJV)",prayer:"Heavenly Father, I come to You with an open heart. Please restore my joy, peace, confidence, hope and every area of my life that needs Your care. Where I feel discouraged, renew my strength. Help me release what I cannot control and take wise steps toward what is good. Remind me that my present season does not define my future. In Jesus’ name, Amen."},
+{title:"Beauty and confidence",verse:"“And let the beauty of the LORD our God be upon us.”",ref:"Psalm 90:17 (KJV)",prayer:"Father, let Your goodness and grace shape the way I see myself and the way I treat others. Help me appreciate the body You have given me and care for it with patience and wisdom. Quiet comparison and insecurity in my heart. Let my confidence come from knowing I am loved by You, not from other people’s attention. In Jesus’ name, Amen."},
+{title:"Favour and friendship",verse:"“With favour wilt thou compass him as with a shield.”",ref:"Psalm 5:12 (KJV)",prayer:"Lord, guide me into kind and genuine friendships. Help me be warm, approachable and courageous enough to begin small conversations. Give me discernment to recognise healthy relationships and the grace to be a good friend. Let me experience belonging without chasing approval. In Jesus’ name, Amen."},
+{title:"Purpose and direction",verse:"“For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.”",ref:"Jeremiah 29:11 (KJV)",prayer:"Heavenly Father, direct my steps and give me wisdom for my studies, decisions and future. Open the right doors in the right time, and help me grow through the doors that remain closed. Give me patience, courage and clarity. Let my life reflect purpose, kindness and faithfulness. In Jesus’ name, Amen."},
+{title:"Health and wholeness",verse:"“Beloved, I wish above all things that thou mayest prosper and be in health.”",ref:"3 John 1:2 (KJV)",prayer:"Father, thank You for the body and life You have given me. Please strengthen me, support my health and renew my mind. Help me make caring choices, rest when I need to and seek help when I need it. Fill my heart with peace and gratitude. In Jesus’ name, Amen."},
+{title:"Joy and renewed hope",verse:"“For your shame ye shall have double...”",ref:"Isaiah 61:7 (KJV)",prayer:"Lord, meet me in the places where I feel overlooked or uncertain. Restore my joy and help me stand with quiet confidence. Teach me not to measure my worth by popularity, appearance or attention. Surround me with people who treat me with kindness, and help me show that same kindness to others. In Jesus’ name, Amen."}
+];
+let current=Math.floor(Date.now()/86400000)%prayers.length;
+const $=id=>document.getElementById(id);
+function render(){const p=prayers[current];$('title').textContent=p.title;$('verse').textContent=p.verse;$('reference').textContent=p.ref;$('prayer').textContent=p.prayer;renderSaved()}
+$('today').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+function renderSaved(){let a=JSON.parse(localStorage.getItem('dgSaved')||'[]');$('savedList').innerHTML=a.length?a.map(i=>`<p>♡ ${prayers[i].title}</p>`).join(''):'No saved prayers yet.'}
+$('another').onclick=()=>{current=(current+1)%prayers.length;render()};
+$('copy').onclick=async()=>{let p=prayers[current];try{await navigator.clipboard.writeText(`${p.title}\n${p.verse}\n${p.ref}\n\n${p.prayer}`);$('copyStatus').textContent='Prayer copied. ♡'}catch(e){$('copyStatus').textContent='Copy is not available in this browser.'}};
+$('save').onclick=()=>{let a=JSON.parse(localStorage.getItem('dgSaved')||'[]');if(!a.includes(current))a.push(current);localStorage.setItem('dgSaved',JSON.stringify(a));renderSaved();$('copyStatus').textContent='Saved to your favourites. ♡'};
+render();
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+let installEvent;$('installBtn').style.display='none';
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;$('installBtn').style.display='inline-block'});
+$('installBtn').onclick=async()=>{if(installEvent){installEvent.prompt();await installEvent.userChoice;installEvent=null;$('installBtn').style.display='none'}};
+const oldTime=localStorage.getItem('dgTime');if(oldTime){$('reminderTime').value=oldTime;$('status').textContent='Reminder saved for '+oldTime+'. Keep this app open for the reminder to appear.'}
+function checkReminder(){let t=localStorage.getItem('dgTime');if(!t)return;let n=new Date(),key='dgSent'+n.toDateString();if(n.getHours()+':'+String(n.getMinutes()).padStart(2,'0')===t&&!localStorage.getItem(key)){localStorage.setItem(key,'1');if('Notification'in window&&Notification.permission==='granted'){if(navigator.serviceWorker?.controller)navigator.serviceWorker.ready.then(r=>r.showNotification('Daily Grace ♡',{body:'It’s time for your daily prayer and a quiet moment with God.',icon:'icon.svg'}));else new Notification('Daily Grace ♡',{body:'It’s time for your daily prayer.'})}}}
+$('setReminder').onclick=async()=>{let t=$('reminderTime').value;if(!t){$('status').textContent='Choose a time first.';return}localStorage.setItem('dgTime',t);if('Notification'in window){let p=await Notification.requestPermission();$('status').textContent=p==='granted'?'Reminder saved for '+t+'. Keep this app open for the reminder to appear.':'Reminder saved for '+t+'. Please allow notifications in your browser settings.'}else $('status').textContent='Reminder saved, but this browser does not support notifications.';checkReminder()};
+setInterval(checkReminder,15000);
+</script>
+</body></html>
