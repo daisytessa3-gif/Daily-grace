@@ -88,4 +88,102 @@ function checkReminder(){let t=localStorage.getItem('dgTime');if(!t)return;let n
 $('setReminder').onclick=async()=>{let t=$('reminderTime').value;if(!t){$('status').textContent='Choose a time first.';return}localStorage.setItem('dgTime',t);if('Notification'in window){let p=await Notification.requestPermission();$('status').textContent=p==='granted'?'Reminder saved for '+t+'. Keep this app open for the reminder to appear.':'Reminder saved for '+t+'. Please allow notifications in your browser settings.'}else $('status').textContent='Reminder saved, but this browser does not support notifications.';checkReminder()};
 setInterval(checkReminder,15000);
 </script>
+<section id="dg-devotional">
+  <h2>🌸 Your Daily Time with God</h2>
+  <p id="dg-date"></p>
+
+  <div class="dg-tabs">
+    <button onclick="showDevotional('morning')">🌅 Morning</button>
+    <button onclick="showDevotional('evening')">🌙 Evening</button>
+  </div>
+
+  <div class="dg-card">
+    <h3 id="dg-title">Good Morning!</h3>
+    <h4 id="dg-verse"></h4>
+    <p id="dg-reflection"></p>
+    <p id="dg-prayer"></p>
+  </div>
+</section>
+
+<style>
+#dg-devotional {
+  margin: 30px 12px;
+  padding: 22px;
+  border-radius: 22px;
+  background: #fff0f3;
+  color: #633b4a;
+  text-align: center;
+  font-family: inherit;
+}
+#dg-devotional h2 { color: #a65370; }
+.dg-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+.dg-tabs button {
+  border: none;
+  border-radius: 20px;
+  padding: 12px 17px;
+  background: #e8a8b8;
+  color: white;
+  font-weight: bold;
+}
+.dg-card {
+  background: #fffaf5;
+  padding: 20px;
+  border-radius: 18px;
+  line-height: 1.7;
+}
+#dg-verse { color: #a65370; }
+</style>
+
+<script>
+const dgContent = {
+  morning: [
+    {
+      verse: "This is the day which the LORD hath made. — Psalm 118:24",
+      reflection: "Every new morning is an opportunity to trust God, grow in faith and walk in His grace.",
+      prayer: "Morning Prayer: Dear God, thank You for the gift of a new day. Guide my thoughts, words and decisions. Help me walk in Your love. Amen."
+    },
+    {
+      verse: "I can do all things through Christ which strengtheneth me. — Philippians 4:13",
+      reflection: "You do not have to face today's challenges alone. God gives strength for each step.",
+      prayer: "Morning Prayer: Lord, give me wisdom, courage and strength today. Help me trust You in everything. Amen."
+    }
+  ],
+  evening: [
+    {
+      verse: "In peace I will both lay me down, and sleep. — Psalm 4:8",
+      reflection: "As the day ends, remember that you can place your worries in God's hands and rest in His care.",
+      prayer: "Evening Prayer: Father, thank You for carrying me through today. Forgive my mistakes and give me peaceful rest. Amen."
+    },
+    {
+      verse: "The LORD is my shepherd; I shall not want. — Psalm 23:1",
+      reflection: "God's care does not end when the day is over. You can rest knowing that He is with you.",
+      prayer: "Evening Prayer: Lord, thank You for Your protection and love. Help me wake tomorrow with a grateful heart. Amen."
+    }
+  ]
+};
+
+function showDevotional(time) {
+  const days = Math.floor(Date.now() / 86400000);
+  const item = dgContent[time][days % dgContent[time].length];
+
+  document.getElementById("dg-title").textContent =
+    time === "morning" ? "🌅 Good Morning!" : "🌙 Good Evening!";
+
+  document.getElementById("dg-verse").textContent = item.verse;
+  document.getElementById("dg-reflection").textContent = item.reflection;
+  document.getElementById("dg-prayer").textContent = item.prayer;
+}
+
+document.getElementById("dg-date").textContent =
+  new Date().toLocaleDateString(undefined, {
+    weekday: "long", year: "numeric", month: "long", day: "numeric"
+  });
+
+showDevotional("morning");
+</script>
 </body></html>
