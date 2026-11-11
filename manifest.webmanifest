@@ -1,18 +1,18 @@
 {
-  "name": "Daily Grace",
-  "short_name": "Daily Grace",
-  "description": "A gentle daily moment with God.",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#fffaf5",
-  "theme_color": "#9b5367",
-  "icons": [
-    {
-      "src": "./icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
-  ]
+"name": "Daily Grace",
+"short_name": "Daily Grace",
+"description": "A daily moment with God.",
+"start_url": "./",
+"scope": "./",
+"display": "standalone",
+"background_color": "#fffaf5",
+"theme_color": "#e8a8b8",
+"icons": [
+{
+"src": "./Daily-Grace-Icon.jpg",
+"sizes": "512x512",
+"type": "image/jpeg",
+"purpose": "any"
+}
+]
 }
